@@ -2,16 +2,22 @@
     <div v-if="activeBlog" class="container-fluid">
     <section class="row">
         <div class="d-flex justify-content-center" >
-            <img :src="activeBlog.imgUrl" alt="">
+            <img class="imgs" :src="activeBlog.imgUrl" alt="">
         </div>
 <div class="col-12 text-center"><h1>{{ activeBlog.title }}</h1></div>
 <div class="text-center">{{ activeBlog.body }}</div>
 
-<router-link :to="{name: 'Profile Details' , params : {profileId : profile.Id}}">
-<div class="text-center">{{ activeBlog.creator.name }} <img :src="activeBlog.creator.picture" alt=""> </div>
+
+<router-link :to="{name: 'Profile Details' , params: {profileId: activeBlog.creatorId}}">
+<div class="text-center">
+    
+    {{ activeBlog.creator.name }} <img class="img" :src="activeBlog.creator.picture" alt=""> 
+
+</div>
 </router-link>
 
-<div class="text-center">{{ activeBlog.creator.email }}</div>
+
+
 <div class="text-center">{{ activeBlog.creator.email }}</div>
 <div class="text-center">{{ activeBlog.createdAt }}</div>
     </section>
@@ -25,6 +31,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { blogsService } from '../services/BlogsService.js';
 import { AppState } from '../AppState.js';
 import { logger } from '../utils/Logger.js';
+import { Blog } from '../models/Blog.js';
 
 
 
@@ -32,6 +39,7 @@ import { logger } from '../utils/Logger.js';
 
 
 export default {
+  
 setup() {
     const route = useRoute()
 onMounted(() => {
@@ -47,8 +55,13 @@ async function getBlogById(){
         Pop.error(error)
     }
 }
+
+
+
   return {
-    activeBlog: computed(() => AppState.activeBlog)
+    activeBlog: computed(() => AppState.activeBlog),
+    profile: computed(() => AppState.activeProfile)
+
   };
 },
 };
@@ -56,4 +69,8 @@ async function getBlogById(){
 
 
 <style>
+.imgs{
+    height: 40vh;
+    width: 40vh;
+}
 </style>
