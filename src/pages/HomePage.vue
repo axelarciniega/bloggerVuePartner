@@ -1,7 +1,6 @@
 <template>
   <section class="row">
     <div v-for="blog in blogs" :key="blog.id">
-        {{ blog.title }}
         <blogCard :blog="blog"/>
     </div>
   </section>
