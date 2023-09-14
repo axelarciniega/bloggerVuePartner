@@ -1,9 +1,21 @@
 <template>
+    <div v-if="activeBlog" class="container-fluid">
     <section class="row">
-        <div v-if="activeBlog">
-            this is the detail page
+        <div class="d-flex justify-content-center" >
+            <img :src="activeBlog.imgUrl" alt="">
         </div>
+<div class="col-12 text-center"><h1>{{ activeBlog.title }}</h1></div>
+<div class="text-center">{{ activeBlog.body }}</div>
+
+<router-link :to="{name: 'Profile Details' , params : {profileId : profile.Id}}">
+<div class="text-center">{{ activeBlog.creator.name }} <img :src="activeBlog.creator.picture" alt=""> </div>
+</router-link>
+
+<div class="text-center">{{ activeBlog.creator.email }}</div>
+<div class="text-center">{{ activeBlog.creator.email }}</div>
+<div class="text-center">{{ activeBlog.createdAt }}</div>
     </section>
+    </div>
 </template>
 
 <script>

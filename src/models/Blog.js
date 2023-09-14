@@ -10,5 +10,6 @@ export class Blog{
         this.published = data.published
         this.creatorId = data.creatorId
         this.creator = data.creator 
+        this.createdAt = data.createdAt
     }
 }
